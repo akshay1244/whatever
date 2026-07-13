@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adios</title>
+
+<meta property="og:title" content="Adios — Kick AI slop off your YouTube feed">
+<meta property="og:description" content="A free browser extension that detects and removes AI-generated slop from YouTube, and blocks ads while it's at it.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230b0b0d'/%3E%3Cpath d='M28 62 L50 30 L72 62' stroke='%23ff5b3a' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cline x1='28' y1='62' x2='72' y2='62' stroke='%23ff5b3a' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; filter: none !important; }</style></noscript>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="logo"><span class="logo-slash">/</span>adios</a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#ad-blocker">Ad blocker</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <a href="#waitlist" class="nav-waitlist">Waitlist</a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="#features">Features</a>
+    <a href="#ad-blocker">Ad blocker</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="#faq">FAQ</a>
+    <a href="#waitlist" class="btn btn-primary btn-block">Join waitlist</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="container hero-center">
+      <h1 class="hero-title" aria-label="Kick ai the f*ck off your feed">
+        <span aria-hidden="true">
+          Kick <span class="accent-slot"><span class="accent-word" id="heroWord">ai</span><span class="cursor-blink" id="heroCursor"></span></span> the f*ck off your feed
+        </span>
+      </h1>
+      <p class="hero-sub">
+        Adios flags <strong>AI-generated slop</strong> before it hits your YouTube feed and strips it
+        out of Home, Search, and Up Next. <strong>Built-in ad blocker</strong> included — because your
+        feed should serve you, not an algorithm.
+      </p>
+
+      <div class="logo-flow reveal">
+        <div class="logo-row" aria-label="Flags content like">
+          <span class="flow-item"><span class="flow-icon">🗣️</span>AI voiceovers</span>
+          <span class="flow-item"><span class="flow-icon">🖼️</span>Thumbnail bait</span>
+          <span class="flow-item"><span class="flow-icon">📼</span>Faceless compilations</span>
+          <span class="flow-item"><span class="flow-icon">😱</span>Ragebait titles</span>
+          <span class="flow-item"><span class="flow-icon">🤖</span>Mass uploads</span>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">↓</div>
+        <div class="logo-row" aria-label="Works with">
+          <span class="flow-item">
+            <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#EA4335"/><circle cx="12" cy="12" r="4" fill="#fff"/><path d="M12 2a10 10 0 0 1 8.66 5H12a5 5 0 0 0-4.33 2.5L3.34 6.5A10 10 0 0 1 12 2z" fill="#FBBC05"/><path d="M3.34 6.5 7.67 9.5A5 5 0 0 0 12 17l-4 6.93A10 10 0 0 1 3.34 6.5z" fill="#34A853"/><path d="M12 22a10 10 0 0 0 8.66-15H12a5 5 0 0 1 4.33 7.5L20.66 21A10 10 0 0 1 12 22z" fill="#4285F4"/></svg>
+            Chrome
+          </span>
+          <span class="flow-item">
+            <svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF9500"/></svg>
+            Firefox
+          </span>
+          <span class="flow-item">
+            <svg width="16" height="16" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#FF0000"/><path d="M10 8.5 16 12 10 15.5Z" fill="#fff"/></svg>
+            YouTube
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-ctas reveal">
+        <a href="#waitlist" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#EA4335"/><circle cx="12" cy="12" r="4" fill="#fff"/><path d="M12 2a10 10 0 0 1 8.66 5H12a5 5 0 0 0-4.33 2.5L3.34 6.5A10 10 0 0 1 12 2z" fill="#FBBC05"/><path d="M3.34 6.5 7.67 9.5A5 5 0 0 0 12 17l-4 6.93A10 10 0 0 1 3.34 6.5z" fill="#34A853"/><path d="M12 22a10 10 0 0 0 8.66-15H12a5 5 0 0 1 4.33 7.5L20.66 21A10 10 0 0 1 12 22z" fill="#4285F4"/></svg>
+          Get it for Chrome
+        </a>
+        <a href="#waitlist" class="btn btn-solid">
+          <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF9500"/></svg>
+          Get it for Firefox
+        </a>
+      </div>
+      <p class="form-note">Not live yet — both buttons join the waitlist below. We'll email you at launch.</p>
+
+      <div class="showcase-panel reveal">
+        <div class="showcase-header">
+          <span class="showcase-icon">((•))</span> Live preview
+        </div>
+        <div class="browser-mock">
+          <div class="browser-chrome">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="url-bar">youtube.com/feed</span>
+          </div>
+
+          <div class="feed-toggle-row">
+            <span class="feed-toggle-label" id="feedLabel">Adios: Off</span>
+            <button class="switch" id="feedSwitch" role="switch" aria-checked="false" aria-label="Toggle Adios">
+              <span class="switch-knob"></span>
+            </button>
+          </div>
+
+          <div class="feed-grid" id="feedGrid">
+            <div class="card" data-type="human">
+              <div class="thumb thumb-1"></div>
+              <div class="meta"><span class="line l1"></span><span class="line l2"></span></div>
+            </div>
+            <div class="card" data-type="slop">
+              <div class="thumb thumb-2"></div>
+              <div class="tag">AI SLOP</div>
+              <div class="meta"><span class="line l1"></span><span class="line l2"></span></div>
+            </div>
+            <div class="card" data-type="ad">
+              <div class="thumb thumb-ad"></div>
+              <div class="tag tag-ad">AD</div>
+              <div class="meta"><span class="line l1"></span><span class="line l2"></span></div>
+            </div>
+            <div class="card" data-type="slop">
+              <div class="thumb thumb-3"></div>
+              <div class="tag">AI SLOP</div>
+              <div class="meta"><span class="line l1"></span><span class="line l2"></span></div>
+            </div>
+            <div class="card" data-type="human">
+              <div class="thumb thumb-4"></div>
+              <div class="meta"><span class="line l1"></span><span class="line l2"></span></div>
+            </div>
+            <div class="card" data-type="human">
+              <div class="thumb thumb-5"></div>
+              <div class="meta"><span class="line l1"></span><span class="line l2"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="problem">
+    <div class="container">
+      <h2 class="reveal">Your feed didn't used to look like this.</h2>
+      <p class="section-sub reveal">
+        Faceless voiceovers over stock footage. Thumbnails with six identical shocked faces.
+        Channels that upload forty videos a day. It's not content — it's filler,
+        optimized for watch time, not for you.
+      </p>
+      <div class="problem-grid">
+        <div class="problem-card reveal">
+          <span class="p-icon">🗣️</span>
+          <h3>AI voiceover farms</h3>
+          <p>Synthetic narration stitched over recycled clips, uploaded on autopilot.</p>
+        </div>
+        <div class="problem-card reveal">
+          <span class="p-icon">🖼️</span>
+          <h3>Thumbnail bait</h3>
+          <p>Generated faces, fake arrows, and outrage bait designed to farm a click.</p>
+        </div>
+        <div class="problem-card reveal">
+          <span class="p-icon">📉</span>
+          <h3>Zero-effort compilations</h3>
+          <p>Reposted clips with a slapped-on intro, no editing, no point of view.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2 class="reveal">How Adios cleans up your feed</h2>
+      <p class="section-sub reveal">Three layers, working together every time you open YouTube.</p>
+
+      <div class="feature-list">
+        <div class="feature-row reveal">
+          <span class="feature-num">01</span>
+          <div class="feature-body">
+            <h3>Detect</h3>
+            <p>Adios checks thumbnails, titles, channel upload patterns, and audio signatures
+            against a constantly-updated slop model — before a video ever loads.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal">
+          <span class="feature-num">02</span>
+          <div class="feature-body">
+            <h3>Block</h3>
+            <p>Flagged videos are hidden, dimmed, or removed entirely from Home, Search, and
+            Up Next — you set how aggressive the filter runs.</p>
+          </div>
+        </div>
+        <div class="feature-row reveal">
+          <span class="feature-num">03</span>
+          <div class="feature-body">
+            <h3>Reclaim</h3>
+            <p>A built-in ad blocker strips pre-rolls, mid-rolls, and banner clutter, so what's
+            left on screen is just the video you actually chose.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="adblock" id="ad-blocker">
+    <div class="container adblock-grid">
+      <div class="adblock-visual reveal">
+        <div class="ad-mock">
+          <div class="ad-mock-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          </div>
+          <div class="ad-mock-player">
+            <div class="ad-banner">
+              <span>Skippable ad · 0:05</span>
+              <span class="ad-strike">BLOCKED</span>
+            </div>
+            <div class="ad-play-icon">▶</div>
+          </div>
+        </div>
+      </div>
+      <div class="adblock-copy reveal">
+        <span class="eyebrow">No extra install</span>
+        <h2>An ad blocker, baked right in.</h2>
+        <p>
+          You shouldn't need two extensions to watch one video. Adios blocks pre-roll,
+          mid-roll, banner, and overlay ads out of the box — so once the slop is gone,
+          nothing else is left to interrupt you.
+        </p>
+        <ul class="check-list">
+          <li>Pre-roll &amp; mid-roll video ads</li>
+          <li>Banner &amp; overlay ads</li>
+          <li>Sponsored "Up Next" placements</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how-it-works">
+    <div class="container">
+      <h2 class="reveal">Set up once. Adios does the rest.</h2>
+      <div class="how-steps">
+        <div class="how-step reveal">
+          <span class="how-num">1</span>
+          <h3>Install</h3>
+          <p>Add Adios to Chrome or Firefox in under a minute. No account required.</p>
+        </div>
+        <div class="how-step reveal">
+          <span class="how-num">2</span>
+          <h3>Scan</h3>
+          <p>Adios reads your feed in real time as YouTube loads it — nothing to trigger manually.</p>
+        </div>
+        <div class="how-step reveal">
+          <span class="how-num">3</span>
+          <h3>Filter</h3>
+          <p>Slop gets flagged and hidden. Ads get blocked. You barely notice it working.</p>
+        </div>
+        <div class="how-step reveal">
+          <span class="how-num">4</span>
+          <h3>Browse</h3>
+          <p>What's left is a feed made of things actual humans made on purpose.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="control">
+    <div class="container control-grid">
+      <div class="control-copy reveal">
+        <span class="eyebrow">Your feed, your rules</span>
+        <h2>Tune it exactly how you like.</h2>
+        <p>
+          Dial the filter from "just the obvious stuff" to "nothing gets through."
+          Allowlist channels you trust, block categories you don't, and adjust anytime —
+          it takes effect instantly.
+        </p>
+      </div>
+      <div class="control-visual reveal">
+        <div class="control-panel">
+          <div class="control-item">
+            <span>AI voiceovers</span>
+            <span class="mini-switch on"></span>
+          </div>
+          <div class="control-item">
+            <span>Thumbnail bait</span>
+            <span class="mini-switch on"></span>
+          </div>
+          <div class="control-item">
+            <span>Faceless compilations</span>
+            <span class="mini-switch"></span>
+          </div>
+          <div class="control-item">
+            <span>Sensitivity</span>
+            <span class="slider"><span class="slider-fill"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <div class="container">
+      <p class="manifesto-text reveal">
+        “We didn't build Adios to hate on AI. We built it because the algorithm
+        can't tell the difference between something made <em>for</em> you and something
+        made <em>at</em> you — so now, something can.”
+      </p>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="reveal">Questions, answered</h2>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-q">
+            <span>What counts as "AI slop"?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div class="faq-a"><p>Mass-produced, low-effort content built to farm watch time — synthetic voiceovers over stock footage, recycled compilations, and thumbnail-bait channels that upload dozens of times a day. Not every AI-assisted video qualifies; Adios targets volume and intent, not the tool used.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">
+            <span>Will it slow down my browsing?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div class="faq-a"><p>No. Filtering happens client-side as the page loads, in milliseconds. You shouldn't notice anything except a cleaner feed.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">
+            <span>Does it work on the YouTube mobile app?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div class="faq-a"><p>Not yet — Adios is a browser extension for desktop Chrome and Firefox at launch. Mobile support is on the roadmap.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">
+            <span>Is my browsing data collected?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div class="faq-a"><p>Adios is built to run locally in your browser. We're not in the business of selling your watch history — full details will ship with the privacy policy at launch.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">
+            <span>Is it really free?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div class="faq-a"><p>Yes. Core slop filtering and ad blocking are free, forever.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">
+            <span>When can I actually use it?</span>
+            <span class="faq-plus">+</span>
+          </button>
+          <div class="faq-a"><p>We're in active development. Join the waitlist and you'll get an email the moment Chrome and Firefox builds are live.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final" id="waitlist">
+    <div class="container">
+      <h2 class="reveal">Say adios to the slop.</h2>
+      <p class="section-sub reveal">Be the first to know when Adios lands on Chrome and Firefox.</p>
+      <form class="waitlist-form waitlist-form-lg reveal" id="waitlistForm2">
+        <input type="email" id="waitlistEmail2" placeholder="you@example.com" required aria-label="Email address">
+        <button type="submit" class="btn btn-primary">Join the waitlist</button>
+      </form>
+      <p class="form-note" id="formNote2">Free forever · No account needed · No spam, one email when we launch.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo"><span class="logo-slash">/</span>adios</a>
+      <p>Kick ai the f*ck off your feed.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#ad-blocker">Ad blocker</a>
+        <a href="#how-it-works">How it works</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:hello@adios.example">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Adios. Not affiliated with YouTube or Google.</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "name": "adios-website",
+  "version": "1.0.0",
+  "description": "Landing page for Adios, a browser extension that blocks AI slop and ads on YouTube.",
+  "private": true,
+  "main": "script.js",
+  "scripts": {
+    "dev": "serve . -l 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akshay1244/whatever.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/akshay1244/whatever/issues"
+  },
+  "homepage": "https://github.com/akshay1244/whatever#readme",
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}

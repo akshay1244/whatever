@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.createskills.io)",
+      "Bash(mkdir -p \"/Users/nishguna/Documents/GitHub/whatever/assets\")",
+      "Bash(python3 -m http.server 8934)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8934/index.html)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(npx --yes chromium-cli --help)",
+      "Bash(node -e \"require\\('playwright'\\)\")",
+      "Bash(npx --yes playwright --version)",
+      "Bash(npm init *)",
+      "Bash(npx playwright *)",
+      "Bash(node shot.js)",
+      "Bash(node diag.js)",
+      "Bash(node diag2.js)",
+      "Bash(node shot2.js)",
+      "Bash(node -e ' *)",
+      "Bash(node interact.js)",
+      "Bash(pkill -f \"python3 -m http.server 8934\")",
+      "Bash(npm -v)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000)",
+      "Bash(pkill -f \"serve . -l 3000\")",
+      "Bash(sed -i '' 's/8934/3000/g' shot.js shot2.js interact.js)"
+    ],
+    "additionalDirectories": [
+      "/Users/nishguna/Documents/GitHub/whatever"
+    ]
+  }
+}
